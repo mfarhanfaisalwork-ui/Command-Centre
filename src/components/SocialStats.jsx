@@ -42,7 +42,9 @@ export default function SocialStats({ entries, business, platforms }) {
   return (
     <div className="social-stats">
       <div className="section-header">
-        <h2>Social stats</h2>
+        <h2>
+          <span className="eyebrow-mark">//</span> Social stats
+        </h2>
         {!open && (
           <button className="btn btn-outline btn-sm" onClick={() => setOpen(true)}>
             + Log post

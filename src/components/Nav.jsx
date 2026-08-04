@@ -3,7 +3,10 @@ import { NavLink } from 'react-router-dom'
 export default function Nav() {
   return (
     <nav className="nav">
-      <div className="nav-brand">Command Center</div>
+      <div className="nav-brand">
+        <span className="nav-brand-dot" aria-hidden="true" />
+        COMMAND_CENTER
+      </div>
       <div className="nav-links">
         <NavLink to="/" end className={({ isActive }) => (isActive ? 'nav-link nav-link-active' : 'nav-link')}>
           Home

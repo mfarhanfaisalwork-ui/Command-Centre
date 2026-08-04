@@ -19,10 +19,13 @@ export default function Countdown() {
 
   return (
     <div className="countdown">
-      <div className="countdown-number">{days}</div>
-      <div className="countdown-label">
-        days left to leave the day job
-        <span className="countdown-sublabel">Target: December 31, 2026</span>
+      <span className="countdown-eyebrow">Exit clock</span>
+      <div className="countdown-body">
+        <div className="countdown-number">{String(days).padStart(3, '0')}</div>
+        <div className="countdown-label">
+          days left to leave the day job
+          <span className="countdown-sublabel">Target: December 31, 2026</span>
+        </div>
       </div>
     </div>
   )

@@ -10,7 +10,9 @@ export default function Home({ tasks, loading }) {
       <Countdown />
 
       <div className="section-header">
-        <h2>Active right now</h2>
+        <h2>
+          <span className="eyebrow-mark">//</span> Active right now
+        </h2>
         <span className="board-count">{activeTasks.length}</span>
       </div>
 

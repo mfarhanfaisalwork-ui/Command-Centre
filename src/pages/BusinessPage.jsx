@@ -10,18 +10,24 @@ import SocialStats from '../components/SocialStats'
  * @param {object[]} stats - full social stats list (unfiltered)
  * @param {boolean} loading
  */
-export default function BusinessPage({ title, business, accentClass, platforms, tasks, stats, loading }) {
+export default function BusinessPage({ title, tagline, business, accentClass, platforms, tasks, stats, loading }) {
   const boardTasks = tasks.filter((t) => t.business === business || t.business === 'merged')
   const businessStats = stats.filter((s) => s.business === business)
 
   return (
     <div className={`page ${accentClass}`}>
       <div className="page-header">
-        <h1>{title}</h1>
+        <div className="page-header-glyph" aria-hidden="true" />
+        <div>
+          <h1>{title}</h1>
+          {tagline && <p className="page-tagline">{tagline}</p>}
+        </div>
       </div>
 
       <div className="section-header">
-        <h2>Tasks</h2>
+        <h2>
+          <span className="eyebrow-mark">//</span> Tasks
+        </h2>
       </div>
       {loading ? <div className="empty-hint">Loading…</div> : <TaskBoard tasks={boardTasks} business={business} />}
 

@@ -23,6 +23,7 @@ export default function App() {
             element={
               <BusinessPage
                 title="NIFAR"
+                tagline="Minecraft digital products · Whop"
                 business="nifar"
                 accentClass="theme-nifar"
                 platforms={NIFAR_PLATFORMS}
@@ -37,6 +38,7 @@ export default function App() {
             element={
               <BusinessPage
                 title="Nifarise"
+                tagline="Rise with AI · Pre-launch"
                 business="nifarise"
                 accentClass="theme-nifarise"
                 platforms={NIFARISE_PLATFORMS}

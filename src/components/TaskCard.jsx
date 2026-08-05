@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { updateTask, deleteTask } from '../lib/tasks'
+import { ArrowLeftIcon, ArrowRightIcon, PencilIcon, TrashIcon } from './Icons'
 
 const STATUS_ORDER = ['todo', 'doing', 'done']
 const STATUS_LABEL = { todo: 'To do', doing: 'Doing', done: 'Done' }
@@ -74,7 +75,7 @@ export default function TaskCard({ task }) {
           onClick={() => move(-1)}
           disabled={currentIndex === 0}
         >
-          ←
+          <ArrowLeftIcon width={13} height={13} />
         </button>
         <button
           className="icon-btn"
@@ -82,13 +83,13 @@ export default function TaskCard({ task }) {
           onClick={() => move(1)}
           disabled={currentIndex === STATUS_ORDER.length - 1}
         >
-          →
+          <ArrowRightIcon width={13} height={13} />
         </button>
         <button className="icon-btn" title="Edit" onClick={() => setEditing(true)}>
-          ✎
+          <PencilIcon width={13} height={13} />
         </button>
         <button className="icon-btn icon-btn-danger" title="Delete" onClick={handleDelete}>
-          ✕
+          <TrashIcon width={13} height={13} />
         </button>
       </div>
       <div className="task-status-tag">{STATUS_LABEL[task.status]}</div>

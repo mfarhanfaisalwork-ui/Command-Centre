@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { addSocialStat, deleteSocialStat } from '../lib/socialStats'
+import { PlusIcon, TrashIcon } from './Icons'
 
 /**
  * @param {object[]} entries - already filtered to this business, newest first
@@ -41,13 +42,10 @@ export default function SocialStats({ entries, business, platforms }) {
 
   return (
     <div className="social-stats">
-      <div className="section-header">
-        <h2>
-          <span className="eyebrow-mark">//</span> Social stats
-        </h2>
+      <div className="social-stats-toolbar">
         {!open && (
           <button className="btn btn-outline btn-sm" onClick={() => setOpen(true)}>
-            + Log post
+            <PlusIcon width={13} height={13} /> Log post
           </button>
         )}
       </div>
@@ -124,7 +122,7 @@ export default function SocialStats({ entries, business, platforms }) {
                       title="Delete"
                       onClick={() => handleDelete(entry.id, entry.postName)}
                     >
-                      ✕
+                      <TrashIcon width={13} height={13} />
                     </button>
                   </td>
                 </tr>

@@ -1,4 +1,5 @@
 import Countdown from '../components/Countdown'
+import { ZapIcon } from '../components/Icons'
 
 const BUSINESS_LABEL = { nifar: 'NIFAR', nifarise: 'Nifarise', merged: 'Both' }
 
@@ -11,7 +12,10 @@ export default function Home({ tasks, loading }) {
 
       <div className="section-header">
         <h2>
-          <span className="eyebrow-mark">//</span> Active right now
+          <span className="icon-chip icon-chip-mixed">
+            <ZapIcon width={15} height={15} />
+          </span>
+          Active right now
         </h2>
         <span className="board-count">{activeTasks.length}</span>
       </div>

@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { addTask } from '../lib/tasks'
+import { PlusIcon } from './Icons'
 
 /**
  * @param {string} business - 'nifar' or 'nifarise'. Used unless "merged" is checked.
@@ -31,7 +32,7 @@ export default function AddTaskForm({ business }) {
   if (!open) {
     return (
       <button className="btn btn-outline btn-block" onClick={() => setOpen(true)}>
-        + Add task
+        <PlusIcon width={13} height={13} /> Add task
       </button>
     )
   }

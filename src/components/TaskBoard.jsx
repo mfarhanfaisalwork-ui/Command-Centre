@@ -2,9 +2,9 @@ import TaskCard from './TaskCard'
 import AddTaskForm from './AddTaskForm'
 
 const COLUMNS = [
-  { key: 'todo', label: 'To do' },
-  { key: 'doing', label: 'Doing' },
-  { key: 'done', label: 'Done' },
+  { key: 'todo', label: 'To do', dotClass: 'status-dot-todo' },
+  { key: 'doing', label: 'Doing', dotClass: 'status-dot-doing' },
+  { key: 'done', label: 'Done', dotClass: 'status-dot-done' },
 ]
 
 /**
@@ -19,7 +19,10 @@ export default function TaskBoard({ tasks, business }) {
         return (
           <div className="board-column" key={col.key}>
             <div className="board-column-header">
-              <span>{col.label}</span>
+              <span className="board-column-label">
+                <span className={`status-dot ${col.dotClass}`} />
+                {col.label}
+              </span>
               <span className="board-count">{columnTasks.length}</span>
             </div>
             <div className="board-column-body">

@@ -104,3 +104,65 @@ export function ArrowRightIcon(props) {
     </svg>
   )
 }
+
+export function UploadIcon(props) {
+  return (
+    <svg {...base} {...props}>
+      <path d="M12 16V4M7 9l5-5 5 5M4 20h16" />
+    </svg>
+  )
+}
+
+export function CheckIcon(props) {
+  return (
+    <svg {...base} {...props}>
+      <path d="M5 12.5 9.5 17 19 7" />
+    </svg>
+  )
+}
+
+export function SkipIcon(props) {
+  return (
+    <svg {...base} {...props}>
+      <path d="M5 5v14l10-7L5 5z" />
+      <path d="M19 5v14" />
+    </svg>
+  )
+}
+
+export function TargetIcon(props) {
+  return (
+    <svg {...base} {...props}>
+      <circle cx="12" cy="12" r="8.5" />
+      <circle cx="12" cy="12" r="4.5" />
+      <circle cx="12" cy="12" r="0.8" fill="currentColor" />
+    </svg>
+  )
+}
+
+export function CalendarIcon(props) {
+  return (
+    <svg {...base} {...props}>
+      <rect x="3.5" y="5" width="17" height="16" rx="2.5" />
+      <path d="M3.5 10h17M8 3v4M16 3v4" />
+    </svg>
+  )
+}
+
+export function AlertIcon(props) {
+  return (
+    <svg {...base} {...props}>
+      <path d="M12 3.5 21.5 20h-19L12 3.5z" strokeLinejoin="round" />
+      <path d="M12 9.5v5M12 17.5h.01" />
+    </svg>
+  )
+}
+
+export function SunIcon(props) {
+  return (
+    <svg {...base} {...props}>
+      <circle cx="12" cy="12" r="4.5" />
+      <path d="M12 2.5v3M12 18.5v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2.5 12h3M18.5 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1" />
+    </svg>
+  )
+}

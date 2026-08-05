@@ -1,43 +1,40 @@
 import Countdown from '../components/Countdown'
+import TodayTasks from '../components/TodayTasks'
+import UploadWeekTasks from '../components/UploadWeekTasks'
+import TiltCard from '../components/TiltCard'
 import { ZapIcon } from '../components/Icons'
+import { todayStr } from '../lib/scheduler'
 
-const BUSINESS_LABEL = { nifar: 'NIFAR', nifarise: 'Nifarise', merged: 'Both' }
-
-export default function Home({ tasks, loading }) {
-  const activeTasks = tasks.filter((t) => t.status === 'doing')
+export default function Home({ weekTasks, loading }) {
+  const today = todayStr()
+  const openTasks = weekTasks.filter((t) => t.status !== 'done')
+  const todaysTasks = weekTasks.filter((t) => t.scheduledDate === today && t.status !== 'done')
 
   return (
     <div className="page">
-      <Countdown />
+      <TiltCard>
+        <Countdown />
+      </TiltCard>
 
       <div className="section-header">
         <h2>
           <span className="icon-chip icon-chip-mixed">
             <ZapIcon width={15} height={15} />
           </span>
-          Active right now
+          Today, across both businesses
         </h2>
-        <span className="board-count">{activeTasks.length}</span>
+        <span className="board-count">{todaysTasks.length}</span>
       </div>
 
       {loading ? (
         <div className="empty-hint">Loading…</div>
-      ) : activeTasks.length === 0 ? (
-        <div className="empty-hint">Nothing marked "Doing" yet in NIFAR or Nifarise</div>
       ) : (
-        <div className="active-list">
-          {activeTasks.map((task) => (
-            <div className="active-item" key={task.id}>
-              <span
-                className={`active-dot active-dot-${task.business === 'merged' ? 'merged' : task.business}`}
-              />
-              <span className="active-title">{task.title}</span>
-              {task.dueDate && <span className="active-due">Due {task.dueDate}</span>}
-              <span className="active-business">{BUSINESS_LABEL[task.business]}</span>
-            </div>
-          ))}
-        </div>
+        <TodayTasks tasks={todaysTasks} allOpenTasks={openTasks} showBusinessTag />
       )}
+
+      <div className="upload-row">
+        <UploadWeekTasks existingOpenTasks={openTasks} />
+      </div>
     </div>
   )
 }

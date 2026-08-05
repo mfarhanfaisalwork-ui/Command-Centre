@@ -15,10 +15,10 @@ export const app = initializeApp(firebaseConfig)
 export const db = getFirestore(app)
 
 // NOTE on future auth:
-// Right now every read/write in src/lib/tasks.js and src/lib/socialStats.js
-// talks directly to top-level Firestore collections ("tasks", "socialStats").
+// Right now every read/write in src/lib/weekTasks.js and src/lib/milestones.js
+// talks directly to top-level Firestore collections ("weekTasks", "milestones").
 // If you add Firebase Auth later, the simplest upgrade path is to nest data
-// under the signed-in user, e.g. collection(db, `users/${uid}/tasks`) instead
-// of collection(db, 'tasks'). Because all Firestore calls are centralized in
+// under the signed-in user, e.g. collection(db, `users/${uid}/weekTasks`) instead
+// of collection(db, 'weekTasks'). Because all Firestore calls are centralized in
 // the src/lib/ files (nothing else in the app talks to Firestore directly),
 // that's a one-file change per collection, not a rewrite of the app.

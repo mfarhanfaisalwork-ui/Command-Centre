@@ -1,20 +1,25 @@
-import TaskBoard from '../components/TaskBoard'
-import SocialStats from '../components/SocialStats'
-import { RocketIcon, SparkleIcon, ListIcon, ChartIcon } from '../components/Icons'
+import TodayTasks from '../components/TodayTasks'
+import WeekView from '../components/WeekView'
+import Milestones from '../components/Milestones'
+import TiltCard from '../components/TiltCard'
+import { RocketIcon, SparkleIcon, ListIcon, TargetIcon, CalendarIcon } from '../components/Icons'
+import { todayStr } from '../lib/scheduler'
 
 /**
  * @param {string} title - page heading, e.g. "NIFAR"
  * @param {string} tagline - short line under the title
  * @param {string} business - 'nifar' or 'nifarise'
  * @param {string} accentClass - CSS class that sets the accent color for this page
- * @param {string[]} platforms - platform dropdown options for social stats
- * @param {object[]} tasks - full task list (unfiltered)
- * @param {object[]} stats - full social stats list (unfiltered)
+ * @param {object[]} weekTasks - full week-task list (unfiltered)
+ * @param {object[]} milestones - full milestone list (unfiltered)
  * @param {boolean} loading
  */
-export default function BusinessPage({ title, tagline, business, accentClass, platforms, tasks, stats, loading }) {
-  const boardTasks = tasks.filter((t) => t.business === business || t.business === 'merged')
-  const businessStats = stats.filter((s) => s.business === business)
+export default function BusinessPage({ title, tagline, business, accentClass, weekTasks, milestones, loading }) {
+  const today = todayStr()
+  const boardTasks = weekTasks.filter((t) => t.business === business || t.business === 'merged')
+  const openTasks = weekTasks.filter((t) => t.status !== 'done')
+  const todaysTasks = boardTasks.filter((t) => t.scheduledDate === today && t.status !== 'done')
+  const businessMilestones = milestones.filter((m) => m.business === business)
   const HeaderIcon = business === 'nifar' ? RocketIcon : SparkleIcon
   const chipClass = business === 'nifar' ? 'icon-chip-nifar' : 'icon-chip-nifarise'
 
@@ -35,20 +40,31 @@ export default function BusinessPage({ title, tagline, business, accentClass, pl
           <span className={`icon-chip ${chipClass}`}>
             <ListIcon width={15} height={15} />
           </span>
-          Tasks
+          Today
         </h2>
+        <span className="board-count">{todaysTasks.length}</span>
       </div>
-      {loading ? <div className="empty-hint">Loading…</div> : <TaskBoard tasks={boardTasks} business={business} />}
+      {loading ? <div className="empty-hint">Loading…</div> : <TodayTasks tasks={todaysTasks} allOpenTasks={openTasks} />}
 
       <div className="section-header">
         <h2>
           <span className={`icon-chip ${chipClass}`}>
-            <ChartIcon width={15} height={15} />
+            <CalendarIcon width={15} height={15} />
           </span>
-          Social stats
+          This week
         </h2>
       </div>
-      <SocialStats entries={businessStats} business={business} platforms={platforms} />
+      {!loading && <TiltCard><WeekView tasks={boardTasks} /></TiltCard>}
+
+      <div className="section-header">
+        <h2>
+          <span className={`icon-chip ${chipClass}`}>
+            <TargetIcon width={15} height={15} />
+          </span>
+          Milestones
+        </h2>
+      </div>
+      {!loading && <Milestones entries={businessMilestones} business={business} />}
     </div>
   )
 }

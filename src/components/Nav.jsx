@@ -1,6 +1,15 @@
-import { NavLink } from 'react-router-dom'
+import { NavLink, useLocation } from 'react-router-dom'
+import { motion } from 'framer-motion'
+
+const LINKS = [
+  { to: '/', label: 'Home', end: true, cls: '' },
+  { to: '/nifar', label: 'NIFAR', end: false, cls: 'nav-link-nifar' },
+  { to: '/nifarise', label: 'Nifarise', end: false, cls: 'nav-link-nifarise' },
+]
 
 export default function Nav() {
+  const location = useLocation()
+
   return (
     <nav className="nav">
       <div className="nav-brand">
@@ -8,21 +17,26 @@ export default function Nav() {
         COMMAND_CENTER
       </div>
       <div className="nav-links">
-        <NavLink to="/" end className={({ isActive }) => (isActive ? 'nav-link nav-link-active' : 'nav-link')}>
-          Home
-        </NavLink>
-        <NavLink
-          to="/nifar"
-          className={({ isActive }) => (isActive ? 'nav-link nav-link-active nav-link-nifar' : 'nav-link nav-link-nifar')}
-        >
-          NIFAR
-        </NavLink>
-        <NavLink
-          to="/nifarise"
-          className={({ isActive }) => (isActive ? 'nav-link nav-link-active nav-link-nifarise' : 'nav-link nav-link-nifarise')}
-        >
-          Nifarise
-        </NavLink>
+        {LINKS.map((link) => {
+          const isActive = link.end ? location.pathname === '/' : location.pathname.startsWith(link.to)
+          return (
+            <NavLink
+              key={link.to}
+              to={link.to}
+              end={link.end}
+              className={`nav-link ${link.cls} ${isActive ? 'nav-link-active' : ''}`}
+            >
+              {isActive && (
+                <motion.span
+                  layoutId="nav-pill"
+                  className="nav-pill"
+                  transition={{ type: 'spring', stiffness: 420, damping: 34 }}
+                />
+              )}
+              <span className="nav-link-text">{link.label}</span>
+            </NavLink>
+          )
+        })}
       </div>
     </nav>
   )

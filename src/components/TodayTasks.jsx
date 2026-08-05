@@ -1,7 +1,7 @@
 import { useState } from 'react'
-import { completeWeekTask, pushTaskToTomorrow } from '../lib/weekTasks'
+import { completeWeekTask, pushTaskToTomorrow, deleteWeekTask } from '../lib/weekTasks'
 import { getPriority, getTimeSlotLabel, todayStr } from '../lib/scheduler'
-import { CheckIcon, SkipIcon, AlertIcon } from './Icons'
+import { CheckIcon, SkipIcon, AlertIcon, TrashIcon } from './Icons'
 
 const BUSINESS_LABEL = { nifar: 'NIFAR', nifarise: 'Nifarise', merged: 'Both' }
 const PRIORITY_LABEL = { high: 'High', medium: 'Medium', low: 'Low' }
@@ -27,6 +27,14 @@ export default function TodayTasks({ tasks, allOpenTasks, showBusinessTag = fals
     setBusyId(task.id)
     await pushTaskToTomorrow(task, allOpenTasks)
     setBusyId(null)
+  }
+
+  async function handleDelete(task) {
+    if (confirm(`Delete "${task.title}"? This can't be undone.`)) {
+      setBusyId(task.id)
+      await deleteWeekTask(task.id)
+      setBusyId(null)
+    }
   }
 
   if (sorted.length === 0) {
@@ -63,26 +71,36 @@ export default function TodayTasks({ tasks, allOpenTasks, showBusinessTag = fals
               <span className="today-deadline">Due {task.deadlineDate}</span>
               {task.notes && <span className="today-notes">{task.notes}</span>}
             </div>
-            {!isDone && (
-              <div className="task-card-actions">
-                <button
-                  className="icon-btn"
-                  title="Mark done"
-                  onClick={() => handleDone(task)}
-                  disabled={busyId === task.id}
-                >
-                  <CheckIcon width={13} height={13} />
-                </button>
-                <button
-                  className="icon-btn"
-                  title="Skip — push to tomorrow"
-                  onClick={() => handlePush(task)}
-                  disabled={busyId === task.id}
-                >
-                  <SkipIcon width={13} height={13} />
-                </button>
-              </div>
-            )}
+            <div className="task-card-actions">
+              {!isDone && (
+                <>
+                  <button
+                    className="icon-btn"
+                    title="Mark done"
+                    onClick={() => handleDone(task)}
+                    disabled={busyId === task.id}
+                  >
+                    <CheckIcon width={13} height={13} />
+                  </button>
+                  <button
+                    className="icon-btn"
+                    title="Skip — push to tomorrow"
+                    onClick={() => handlePush(task)}
+                    disabled={busyId === task.id}
+                  >
+                    <SkipIcon width={13} height={13} />
+                  </button>
+                </>
+              )}
+              <button
+                className="icon-btn icon-btn-danger"
+                title="Delete"
+                onClick={() => handleDelete(task)}
+                disabled={busyId === task.id}
+              >
+                <TrashIcon width={13} height={13} />
+              </button>
+            </div>
           </div>
         )
       })}

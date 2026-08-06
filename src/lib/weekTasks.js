@@ -99,9 +99,15 @@ export async function uploadWeekTasks(rows, existingOpenTasks = []) {
   return newDocRefs.length
 }
 
-/** Mark a task done. */
+/**
+ * Mark a task done. completedAt is what the weekly report uses to work out
+ * which day the work actually landed on, rather than which day it was planned.
+ */
 export function completeWeekTask(id) {
-  return updateDoc(doc(db, 'weekTasks', id), { status: 'done' })
+  return updateDoc(doc(db, 'weekTasks', id), {
+    status: 'done',
+    completedAt: serverTimestamp(),
+  })
 }
 
 /** Permanently remove a task. */

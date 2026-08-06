@@ -5,6 +5,7 @@ const LINKS = [
   { to: '/', label: 'Home', end: true, cls: '' },
   { to: '/nifar', label: 'NIFAR', end: false, cls: 'nav-link-nifar' },
   { to: '/nifarise', label: 'Nifarise', end: false, cls: 'nav-link-nifarise' },
+  { to: '/report', label: 'Report', end: false, cls: '' },
 ]
 
 export default function Nav() {

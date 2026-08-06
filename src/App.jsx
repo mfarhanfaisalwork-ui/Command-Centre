@@ -4,6 +4,7 @@ import Nav from './components/Nav'
 import Login from './components/Login'
 import Home from './pages/Home'
 import BusinessPage from './pages/BusinessPage'
+import Report from './pages/Report'
 import useAuth from './hooks/useAuth'
 import useWeekTasks from './hooks/useWeekTasks'
 import useMilestones from './hooks/useMilestones'
@@ -82,6 +83,14 @@ function Dashboard() {
                     milestones={milestones}
                     loading={tasksLoading || milestonesLoading}
                   />
+                </AnimatedPage>
+              }
+            />
+            <Route
+              path="/report"
+              element={
+                <AnimatedPage>
+                  <Report weekTasks={weekTasks} loading={tasksLoading} />
                 </AnimatedPage>
               }
             />

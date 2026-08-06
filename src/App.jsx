@@ -1,8 +1,10 @@
 import { Routes, Route, useLocation } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import Nav from './components/Nav'
+import Login from './components/Login'
 import Home from './pages/Home'
 import BusinessPage from './pages/BusinessPage'
+import useAuth from './hooks/useAuth'
 import useWeekTasks from './hooks/useWeekTasks'
 import useMilestones from './hooks/useMilestones'
 
@@ -18,6 +20,21 @@ function AnimatedPage({ children }) {
 }
 
 export default function App() {
+  const { user, checking } = useAuth()
+
+  // Firebase needs a moment to restore the session from local storage. Rendering
+  // nothing here stops the login screen from flashing on every page refresh.
+  if (checking) return null
+  if (!user) return <Login />
+
+  return <Dashboard />
+}
+
+/**
+ * Split out so the Firestore hooks below only ever run for a signed-in user.
+ * If they lived in App they would fire before login and hit permission errors.
+ */
+function Dashboard() {
   const { weekTasks, loading: tasksLoading } = useWeekTasks()
   const { milestones, loading: milestonesLoading } = useMilestones()
   const location = useLocation()

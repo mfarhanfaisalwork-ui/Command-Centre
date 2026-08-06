@@ -1,7 +1,10 @@
 import { initializeApp } from 'firebase/app'
 import { getFirestore } from 'firebase/firestore'
+import { getAuth } from 'firebase/auth'
 
-// Your Firebase project config
+// Your Firebase project config.
+// This is safe to keep public — Firebase configs are meant to be visible in the
+// frontend. Real security comes from Firestore rules + Auth, not from hiding this.
 const firebaseConfig = {
   apiKey: 'AIzaSyAGSDoGnpVFzLenrfjv5FIXspfWEao8TZU',
   authDomain: 'farhan-command-center.firebaseapp.com',
@@ -13,12 +16,9 @@ const firebaseConfig = {
 
 export const app = initializeApp(firebaseConfig)
 export const db = getFirestore(app)
+export const auth = getAuth(app)
 
-// NOTE on future auth:
-// Right now every read/write in src/lib/weekTasks.js and src/lib/milestones.js
-// talks directly to top-level Firestore collections ("weekTasks", "milestones").
-// If you add Firebase Auth later, the simplest upgrade path is to nest data
-// under the signed-in user, e.g. collection(db, `users/${uid}/weekTasks`) instead
-// of collection(db, 'weekTasks'). Because all Firestore calls are centralized in
-// the src/lib/ files (nothing else in the app talks to Firestore directly),
-// that's a one-file change per collection, not a rewrite of the app.
+// Firebase's email/password provider requires an email address, but the login
+// screen only asks for a username. We append this domain internally so you can
+// type "farhan" instead of a full email. The domain never needs to exist.
+export const LOGIN_DOMAIN = '@command-centre.local'

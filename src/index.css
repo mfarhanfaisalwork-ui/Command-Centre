@@ -6,12 +6,12 @@
    ========================================================================== */
 
 :root {
-  --bg: #f6f7fb;
+  --bg: #ffffff;
   --surface: #ffffff;
   --surface-2: #f1f2f7;
   --surface-3: #e7e9f1;
 
-  --border: #e6e8f0;
+  --border: #ebedf3;
   --border-strong: #d3d7e4;
 
   --text: #191c27;
@@ -43,9 +43,9 @@
   --radius-sm: 8px;
   --radius-lg: 16px;
 
-  --shadow: 0 1px 2px rgba(25, 28, 39, 0.04), 0 6px 20px rgba(25, 28, 39, 0.05);
+  --shadow: none;
 
-  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-body: 'Poppins', system-ui, -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, monospace;
 }
 
@@ -63,7 +63,8 @@ body {
   background: var(--bg);
   color: var(--text);
   font-family: var(--font-body);
-  font-size: var(--fs-sm);
+ font-size: var(--fs-sm);
+  font-weight: 500;
   line-height: 1.55;
   -webkit-font-smoothing: antialiased;
 }
@@ -126,7 +127,7 @@ h3 {
 
 .sidebar-brand-text {
   font-size: var(--fs-md);
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: -0.01em;
 }
 
@@ -145,7 +146,7 @@ h3 {
   color: var(--text-dim);
   text-decoration: none;
   font-size: var(--fs-sm);
-  font-weight: 500;
+  font-weight: 600;
   transition: background 0.15s ease, color 0.15s ease;
 }
 
@@ -233,14 +234,16 @@ h3 {
 }
 
 .page-header h1 {
-  font-size: var(--fs-xl);
-  line-height: 1.15;
+  font-size: 23px;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
 }
 
 .page-tagline {
-  margin: 3px 0 0;
+  margin: 4px 0 0;
   font-size: var(--fs-sm);
-  color: var(--text-faint);
+  color: var(--text-dim);
 }
 
 .section-header {
@@ -1256,6 +1259,7 @@ h3 {
 .grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  align-items: start;
   gap: 16px;
 }
 
@@ -1282,9 +1286,9 @@ h3 {
 }
 
 .card-label {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.1em;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--text-faint);
 }
@@ -1357,7 +1361,7 @@ h3 {
 .ring-value {
   position: relative;
   font-family: var(--font-mono);
-  font-size: 19px;
+  font-size: 17px;
   font-weight: 600;
   letter-spacing: -0.02em;
   color: var(--text);
@@ -1372,7 +1376,7 @@ h3 {
 
 .ring-label {
   font-size: var(--fs-sm);
-  font-weight: 500;
+  font-weight: 600;
   color: var(--text);
 }
 
@@ -1393,7 +1397,7 @@ h3 {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   gap: 10px;
-  height: 150px;
+  height: 124px;
 }
 
 .wchart-col {
@@ -1412,10 +1416,10 @@ h3 {
 .wchart-bar {
   position: relative;
   width: 100%;
-  max-width: 34px;
+  max-width: 28px;
   height: 100%;
   border-radius: var(--radius-sm);
-  background: var(--surface-2);
+  background: #f4f5f9;
   overflow: hidden;
 }
 

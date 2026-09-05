@@ -1,9 +1,10 @@
 import { Routes, Route, useLocation } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
-import Nav from './components/Nav'
+import Sidebar from './components/Sidebar'
 import Login from './components/Login'
 import Home from './pages/Home'
 import BusinessPage from './pages/BusinessPage'
+import Report from './pages/Report'
 import useAuth from './hooks/useAuth'
 import useWeekTasks from './hooks/useWeekTasks'
 import useMilestones from './hooks/useMilestones'
@@ -41,7 +42,7 @@ function Dashboard() {
 
   return (
     <div className="app">
-      <Nav />
+      <Sidebar />
       <main className="main">
         <AnimatePresence mode="wait">
           <Routes location={location} key={location.pathname}>
@@ -59,7 +60,7 @@ function Dashboard() {
                 <AnimatedPage>
                   <BusinessPage
                     title="NIFAR"
-                    tagline="Minecraft digital products · Whop"
+                    tagline="Digital products · Whop"
                     business="nifar"
                     accentClass="theme-nifar"
                     weekTasks={weekTasks}
@@ -75,13 +76,21 @@ function Dashboard() {
                 <AnimatedPage>
                   <BusinessPage
                     title="Nifarise"
-                    tagline="Rise with AI · Pre-launch"
+                    tagline="AI automation · Pre-launch"
                     business="nifarise"
                     accentClass="theme-nifarise"
                     weekTasks={weekTasks}
                     milestones={milestones}
                     loading={tasksLoading || milestonesLoading}
                   />
+                </AnimatedPage>
+              }
+            />
+            <Route
+              path="/report"
+              element={
+                <AnimatedPage>
+                  <Report weekTasks={weekTasks} loading={tasksLoading} />
                 </AnimatedPage>
               }
             />
